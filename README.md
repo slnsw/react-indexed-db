@@ -1,4 +1,6 @@
-# react-indexed-db
+# @slnsw/react-indexed-db
+
+Fork of [react-indexed-db](https://github.com/assuncaocharles/react-indexed-db)
 
 react-indexed-db is a service that wraps IndexedDB database in an "easier to use" service.
 It exposes very simple promises API to enable the usage of IndexedDB without most of it plumbing.

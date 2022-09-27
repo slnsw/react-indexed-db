@@ -4,10 +4,12 @@ module.exports = function(config) {
 	config.set({
 		basePath: '',
 		frameworks: ['jasmine'],
-		files: ['**/*.spec.ts'],
-		exclude: ['./node_modules/'],
+		files: ['src/*.spec.ts'],
+		exclude: [
+			'node_modules'
+		],
 		preprocessors: {
-			'**/*.spec.ts': ['webpack', 'coverage']
+			'src/*.spec.ts': ['webpack', 'coverage']
 		},
 		plugins: [
 			'karma-chrome-launcher',
@@ -20,17 +22,18 @@ module.exports = function(config) {
 			// (you don't need to specify the entry option)
 			// webpack watches dependencies
 			resolve: {
-				extensions: ['.ts', '.tsx', '.js']
+				extensions: ['.ts', '.tsx', '.js'],
+				fallback: {
+					fs: false,
+				}
 			},
 			devtool: 'inline-source-map',
-			node: {
-				fs: 'empty'
-			},
 			module: {
 				rules: [
 					{
 						test: /\.tsx?$/,
-						loader: 'awesome-typescript-loader'
+						exclude: /node_modules/,
+						loader: 'ts-loader'
 					}
 				]
 			}
