@@ -4,6 +4,9 @@ import { ObjectStoreMeta, ObjectStoreSchema } from './indexed-hooks';
 import { createReadwriteTransaction } from './createReadwriteTransaction';
 import { createReadonlyTransaction } from './createReadonlyTransaction';
 
+interface IDBArrayKey extends Array<IDBValidKey>{
+}
+
 export type Key = string | number | Date | ArrayBufferView | ArrayBuffer | IDBArrayKey | IDBKeyRange;
 export interface IndexDetails {
   indexName: string;
@@ -173,7 +176,7 @@ export function DBOperations(dbName: string, version: number, currentStore: stri
         validateBeforeTransaction(db, currentStore, reject);
         const { store, transaction } = createReadwriteTransaction(db, currentStore, resolve, reject);
 
-        transaction.oncomplete = () => resolve();
+        transaction.oncomplete = (event) => resolve(event);
 
         store.clear();
       });
