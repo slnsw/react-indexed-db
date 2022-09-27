@@ -1,6 +1,6 @@
 {
-  "name": "react-indexed-db",
-  "version": "1.0.12",
+  "name": "@slnsw/react-indexed-db",
+  "version": "1.0.13",
   "description": "React wrapper to IndexedDB database.",
   "main": "lib/main.js",
   "types": "lib/index.d.ts",
@@ -15,12 +15,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/assuncaocharles/react-indexed-db.git"
+    "url": "git+https://github.com/slnsw/react-indexed-db.git"
   },
   "author": "Charles Assunção",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/assuncaocharles/react-indexed-db/issues"
+    "url": "https://github.com/slnsw/react-indexed-db/issues"
   },
   "keywords": [
     "indexed",
@@ -35,7 +35,7 @@
     "database",
     "storage"
   ],
-  "homepage": "https://github.com/assuncaocharles/react-indexed-db",
+  "homepage": "https://github.com/slnsw/react-indexed-db",
   "peerDependencies": {
     "react": "^17.0.2 || ^18.0",
     "react-dom": "^17.0.2 || ^18.0",
