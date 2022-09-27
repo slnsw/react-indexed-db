@@ -1,5 +1,5 @@
 {
-  "name": "slnsw/react-indexed-db",
+  "name": "@slnsw/react-indexed-db",
   "version": "1.0.13",
   "description": "React wrapper to IndexedDB database.",
   "main": "lib/main.js",
