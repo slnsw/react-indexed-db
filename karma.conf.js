@@ -1,3 +1,5 @@
+process.env.CHROME_BIN = require('puppeteer').executablePath();
+
 module.exports = function(config) {
 	config.set({
 		basePath: '',
@@ -7,6 +9,12 @@ module.exports = function(config) {
 		preprocessors: {
 			'**/*.spec.ts': ['webpack', 'coverage']
 		},
+		plugins: [
+			'karma-chrome-launcher',
+			'karma-coverage',
+			'karma-jasmine',
+			'karma-webpack'
+		],
 		webpack: {
 			// karma watches the test entry points
 			// (you don't need to specify the entry option)
@@ -45,7 +53,7 @@ module.exports = function(config) {
 		colors: true,
 		logLevel: config.LOG_INFO,
 		autoWatch: true,
-		browsers: ['PhantomJS'],
+		browsers: ['ChromeHeadless'],
 		singleRun: true,
 		concurrency: Infinity
 	});
