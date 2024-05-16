@@ -15,11 +15,29 @@ export interface IndexDetails {
   indexName: string;
   order: string;
 }
-const indexedDB: IDBFactory =
-  window.indexedDB ||
-  (<any>window).mozIndexedDB ||
-  (<any>window).webkitIndexedDB ||
-  (<any>window).msIndexedDB;
+
+/**
+ * Fetches the IndexedDB Factory if we are in a browser.
+ * @returns {IDBFactory|null} The IndexedDB factory if we have one.
+ */
+const getNativeIndexedDB = (): IDBFactory | null => {
+  if (typeof window !== 'undefined') {
+    if (window.indexedDB) {
+      return window.indexedDB;
+    }
+    const anyWindow = window as any;
+    if (anyWindow.mozIndexedDB) {
+      return anyWindow.mozIndexedDB;
+    }
+    if (anyWindow.webkitIndexedDB) {
+      return anyWindow.webkitIndexedDB;
+    }
+    if (anyWindow.msIndexedDB) {
+      return anyWindow.msIndexedDB;
+    }
+  }
+  return null;
+};
 
 export function openDatabase(
   dbName: string,
@@ -27,6 +45,10 @@ export function openDatabase(
   upgradeCallback?: (e: Event, db: IDBDatabase) => void,
 ) {
   return new Promise<IDBDatabase>((resolve, reject) => {
+    const indexedDB = getNativeIndexedDB();
+    if (!indexedDB) {
+      reject(`IndexedDB error: Not available in this environment.`);
+    }
     const request = indexedDB.open(dbName, version);
     let db: IDBDatabase;
     request.onsuccess = () => {
